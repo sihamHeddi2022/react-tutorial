@@ -1,36 +1,25 @@
 
-import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Home from './Home';
-import Products from './Products';
-import Product from './Product';
-import Card from './Card';
-import { createContext, useState } from 'react';
 //import './App.css';
 
-export const AppContext = createContext()
+import { useCounter } from "./useCounter";
+
 
 
 function App() {
-
-   const [product, setproduct] = useState("")
+   const  [counter,increment,decrement,restart]= useCounter()
    
   return (
     <div >
-      <AppContext.Provider value={{product,setproduct}}>
-          <Router>
-              <Link to={"/"}> home</Link> |
-              <Link to={"/products"}> products</Link> |
-              <Link to={"/card"}> card</Link>
-                <Routes>
-                  <Route path="/" element={<Home/>}/>
-                  <Route path="/products" element={<Products/>} />
-                  <Route path="/product/1" element={<Product/>} />
-                  <Route path="/card" element={<Card/>} />
-                </Routes>
-                
-          </Router>
-      </AppContext.Provider>
-  
+       <p>counter : {counter}</p>
+       <button onClick={increment}>
+          increment
+       </button>
+       <button  onClick={decrement}>
+           decrement
+       </button>
+       <button  onClick={restart}>
+          restart
+       </button>
     </div>
   );
 }
